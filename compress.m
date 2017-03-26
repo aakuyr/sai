@@ -20,29 +20,29 @@ for J=1:H
 																								for j=1:8
 																																for k=1:8
 																																						X(j,k,D,J,K) = I((J-1)*8+j,(K-1)*8+k,D);
-																																endfor
-																								endfor
-																endfor
-								endfor
-endfor
+																																end
+																								end
+																end
+								end
+end
 for i=1:H
 								for j=1:W
 																for D=1:3
 																								X(:,:,D,i,j) = dct2(X(:,:,D,i,j));
-																endfor
-								endfor
-endfor
+																end
+								end
+end
 for tarun=1:8
 								for sohil=1:8
 																for i=1:H
 																								for j=1:W
 																																for D=1:3
 																																								X(tarun,sohil,D,i,j) /= Q(tarun,sohil);
-																																endfor
-																								endfor
-																endfor
-								endfor
-endfor
+																																end
+																								end
+																end
+								end
+end
 ceil(X);
 endfunction
 
@@ -53,34 +53,34 @@ for tarun=1:8
 																								for j=1:W
 																																for D=1:3
 																																								X(tarun,sohil,D,i,j) *= Q(tarun,sohil);
-																																endfor
-																								endfor
-																endfor
-								endfor
-endfor
+																																end
+																								end
+																end
+								end
+end
 for i=1:H
 								for j=1:W
 																for D=1:3
 																								A =  zigzag(X(:,:,D,i,j));
-																endfor
-								endfor
-endfor
+																end
+								end
+end
 for i=1:H
 								for j=1:W
 																for D=1:3
 																								X(:,:,D,i,j) = idct2(X(:,:,D,i,j));
-																endfor
-								endfor
-endfor
+																end
+								end
+end
 for J=1:H
 								for K = 1:W
 																for D=1:3
 																								for j=1:8
 																																for k=1:8
 																																						I((J-1)*8+j,(K-1)*8+k,D) = X(j,k,D,J,K) ;
-																																endfor
-																								endfor
-																endfor
-								endfor
-endfor
+																																end
+																								end
+																end
+								end
+end
 endfunction
