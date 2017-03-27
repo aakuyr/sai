@@ -1,5 +1,5 @@
-function compress 
 pkg load signal;
+pkg load miscellaneous;
 I = imread(input("Please enter the path of image\n"));
 Q=[...
     16  11  10  16  24  40  51  61
@@ -43,10 +43,15 @@ for tarun=1:8
 																end
 								end
 end
+for i=1:H
+								for j=1:W
+																for D=1:3
+																								A =saizag(X(:,:,D,i,j));
+																end
+								end
+end
 ceil(X);
-endfunction
 
-function decompress(X,H,W,I,A)
 for tarun=1:8
 								for sohil=1:8
 																for i=1:H
@@ -55,13 +60,6 @@ for tarun=1:8
 																																								X(tarun,sohil,D,i,j) *= Q(tarun,sohil);
 																																end
 																								end
-																end
-								end
-end
-for i=1:H
-								for j=1:W
-																for D=1:3
-																								A =  zigzag(X(:,:,D,i,j));
 																end
 								end
 end
@@ -83,4 +81,3 @@ for J=1:H
 																end
 								end
 end
-endfunction
