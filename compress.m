@@ -29,24 +29,9 @@ for i=1:H
 		end
 	end
 end
-printf("Three")
-	for i=1:H
-		for j=1:W
-				X(:,:,[1:3],i,j) = Q(:,:) ./ X(:,:,[1:3],i,j);
-		end
-	end
+X = X ./ Q;
 ceil(X);
-printf("Four")
-for i=1:H
-	for j=1:W
-		X(:,:,[1:3],i,j) = Q(:,:) .* X(:,:,[1:3],i,j);
-	end
-end
-for i=1:H
-	for j=1:W
-		A = saizag(X(:,:,[1:3],i,j));
-	end
-end
+X = X .* Q;
 for i=1:H
 	for j=1:W
 		for D=1:3
@@ -54,6 +39,7 @@ for i=1:H
 		end
 	end
 end
+printf("Hey");
 for J=1:H
 	for K = 1:W
 		I((J-1)*8+[1:8],(K-1)*8+[1:8],[1:3]) = X(:,:,[1:3],J,K) ;
