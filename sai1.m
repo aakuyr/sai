@@ -14,27 +14,27 @@ Q=[...
 A = [1:64];
 H = rows(I)/8;
 W = columns(I)/8;
-X = zeros(8,8,3,H,W);
+X = zeros(8,8,H,W,3);
 anirud = []
 for J=1:H
 printf("One")
 	for K = 1:W
-		X(:,:,[1:3],J,K) = I((J-1)*8+[1:8],(K-1)*8+[1:8],[1:3]);
+		X(:,:,J,K,[1:3]) = I((J-1)*8+[1:8],(K-1)*8+[1:8],[1:3]);
 	end
 end
 for i=1:H
 printf("Two")
 	for j=1:W
 			for D=1:3
-			X(:,:,D,i,j) = dct2(X(:,:,D,i,j));
+			X(:,:,i,j,D) = dct2(X(:,:,i,j,D));
 			end
 	end
 end
-	X = X ./ Q;
-return
+X = X ./ Q;
+return;
 endfunction
 
-function [X, I] = decompress(X, J)
+function [X,I] = decompress(X, J)
 source("z.m")
 pkg load signal;
 Q=[...
@@ -49,19 +49,19 @@ Q=[...
 A = [1:64];
 H = rows(J)/8;
 W = columns(J)/8;
-  X = X .* Q;
+X = X .* Q;
 for i=1:H
 	printf("Five");
 	for j=1:W
 		for D=1:3
-		X(:,:,D,i,j) = idct2(X(:,:,D,i,j));
+		X(:,:,i,j,D) = idct2(X(:,:,i,j,D));
 		end
 	end
 end
 for J=1:H
 	printf("Six")
 	for K = 1:W
-		I((J-1)*8+[1:8],(K-1)*8+[1:8],[1:3]) = X(:,:,[1:3],J,K) ;
+		I((J-1)*8+[1:8],(K-1)*8+[1:8],[1:3]) = X(:,:,J,K,[1:3]);
 	end
 end
 return 
