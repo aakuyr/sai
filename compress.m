@@ -1,5 +1,5 @@
+source("z.m")
 pkg load signal;
-pkg load miscellaneous;
 I = imread(input("Please enter the path of image\n"));
 Q=[...
     16  11  10  16  24  40  51  61
@@ -14,70 +14,48 @@ A = [1:64];
 H = rows(I)/8;
 W = columns(I)/8;
 X = zeros(8,8,3,H,W);
+anirud = []
 for J=1:H
-								for K = 1:W
-																for D=1:3
-																								for j=1:8
-																																for k=1:8
-																																						X(j,k,D,J,K) = I((J-1)*8+j,(K-1)*8+k,D);
-																																end
-																								end
-																end
-								end
+printf("One")
+	for K = 1:W
+		X(:,:,[1:3],J,K) = I((J-1)*8+[1:8],(K-1)*8+[1:8],[1:3]);
+	end
 end
+printf("Two")
 for i=1:H
-								for j=1:W
-																for D=1:3
-																								X(:,:,D,i,j) = dct2(X(:,:,D,i,j));
-																end
-								end
+	for j=1:W
+		for D=1:3
+			X(:,:,D,i,j) = dct2(X(:,:,D,i,j));
+		end
+	end
 end
-for tarun=1:8
-								for sohil=1:8
-																for i=1:H
-																								for j=1:W
-																																for D=1:3
-																																								X(tarun,sohil,D,i,j) /= Q(tarun,sohil);
-																																end
-																								end
-																end
-								end
-end
-for i=1:H
-								for j=1:W
-																for D=1:3
-																								A =saizag(X(:,:,D,i,j));
-																end
-								end
-end
+printf("Three")
+	for i=1:H
+		for j=1:W
+				X(:,:,[1:3],i,j) = Q(:,:) ./ X(:,:,[1:3],i,j);
+		end
+	end
 ceil(X);
-
-for tarun=1:8
-								for sohil=1:8
-																for i=1:H
-																								for j=1:W
-																																for D=1:3
-																																								X(tarun,sohil,D,i,j) *= Q(tarun,sohil);
-																																end
-																								end
-																end
-								end
+printf("Four")
+for i=1:H
+	for j=1:W
+		X(:,:,[1:3],i,j) = Q(:,:) .* X(:,:,[1:3],i,j);
+	end
 end
 for i=1:H
-								for j=1:W
-																for D=1:3
-																								X(:,:,D,i,j) = idct2(X(:,:,D,i,j));
-																end
-								end
+	for j=1:W
+		A = saizag(X(:,:,[1:3],i,j));
+	end
+end
+for i=1:H
+	for j=1:W
+		for D=1:3
+		X(:,:,D,i,j) = idct2(X(:,:,D,i,j));
+		end
+	end
 end
 for J=1:H
-								for K = 1:W
-																for D=1:3
-																								for j=1:8
-																																for k=1:8
-																																						I((J-1)*8+j,(K-1)*8+k,D) = X(j,k,D,J,K) ;
-																																end
-																								end
-																end
-								end
+	for K = 1:W
+		I((J-1)*8+[1:8],(K-1)*8+[1:8],[1:3]) = X(:,:,[1:3],J,K) ;
+	end
 end
