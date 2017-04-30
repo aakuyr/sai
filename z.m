@@ -1,6 +1,6 @@
 function v = saizag(A)
 	v = [];
- for i=1:rows(A)+columns(A)-1
+ 	for i=1:rows(A)+columns(A)-1
 	J=max(1,i-rows(A)+1);
 	count=min(min(rows(A), i), columns(A)-J+1);
 	for j=0:count-1
