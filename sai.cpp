@@ -1,13 +1,12 @@
-#include "iostream"
-#include "map"
-using namespace std;
-int main(){
-	cout<<"Hello World\n";
-	map<char, int> a;
-	a['a']=1;
-	a['b']=2;
-	for(auto i:a){
-		cout<<i.first<<"\t";
-		cout<<i.second<<endl;
-	}
+#include <octave/oct.h>
+
+DEFUN_DLD (helloworld, args, nargout,
+           "Hello World Help String")
+{
+  octave_stdout << "Hello World has "
+                << args.length () << " input arguments and "
+                << nargout << " output arguments.\n";
+
+  return octave_value_list ();
 }
+
