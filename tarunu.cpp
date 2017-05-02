@@ -1,10 +1,10 @@
 #include "octave/oct.h"
-
+#include "bits/stdc++.h"
+using namespace std;
 DEFUN_DLD (hell, args, nargs, "Hey")
 {
-	if (args.length () < 1)
-    		print_usage ();
-	octave_stdout<<"Hello World\n";
 	NDArray tarunu = args(0).array_value();
-	return octave_value(tarunu);
+	vector<int> a;
+	a.push_back(tarunu(0));
+	return octave_value(a[0]);
 }

@@ -1,6 +1,7 @@
 function [X, I, A] = sohil
 source("z.m")
 pkg load signal;
+pkg load image;
 I = imread(input("Please enter the path of image\n"));
 Q=[...
     16  11  10  16  24  40  51  61
@@ -35,6 +36,7 @@ for i=1:H
 	printf("Hey");
 	for j=1:W
 			A = [A ; saizag(X(:,:,[1:3],i,j))];
+
 	end
 end
 return
@@ -58,7 +60,7 @@ Q=[...
 for i=1:H
 	for j=1:W
 		for D=1:3
-			X(:,:,D,i,j) = isaizag(A(j+(i-1)*32,:,D));
+			X(:,:,D,i,j) = isaizag(A(j+(i-1)*W,:,D));
 		end
 	end
 end
